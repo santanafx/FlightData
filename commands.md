@@ -1,0 +1,1 @@
+dotnet add package Swashbuckle.AspNetCore --version 9.0.6
