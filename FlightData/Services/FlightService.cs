@@ -9,26 +9,49 @@ public class FlightService : IFlightService
 
   public Flight CreateFlight(Flight flight)
   {
-    throw new NotImplementedException();
+    var savedFlight = _dbContext.Add(flight);
+    _dbContext.SaveChanges();
+    return savedFlight.Entity;
   }
 
   public string? DeleteFlight(int id)
   {
-    throw new NotImplementedException();
+    var savedFlight = _dbContext.Flights.Find(id);
+
+    if (savedFlight == null)
+      return null;
+
+    _dbContext.Flights.Remove(savedFlight);
+    _dbContext.SaveChanges();
+
+    return $"Successfully deleted flight with id: {id}";
   }
 
   public List<Flight> GetAllFlights()
   {
-    throw new NotImplementedException();
+    return _dbContext.Flights.ToList();
   }
 
   public Flight? GetFlightById(int id)
   {
-    throw new NotImplementedException();
+    var savedFlight = _dbContext.Flights.Find(id);
+
+    if (savedFlight == null)
+      return null;
+
+    return savedFlight;
   }
 
   public Flight UpdateFlight(int id, Flight updatedFlight)
   {
-    throw new NotImplementedException();
+    var savedFlight = _dbContext.Flights.Find(id);
+
+    if (savedFlight == null)
+      return null;
+
+    _dbContext.Entry(savedFlight).CurrentValues.SetValues(updatedFlight);
+    _dbContext.SaveChanges();
+
+    return savedFlight;
   }
 }
