@@ -5,7 +5,7 @@ dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 9.0.19
 
 cria o arquivo FlightsDbContext.cs
 
-configura a connection string em appsettings.json "Server=localhost;Database=db;User Id=admin;Password=Adm1n@2024.;Encrypt=Optional;TrustServerCertificate=True;"
+configura a connection string em appsettings.json "Server=localhost;Database=db;User Id=sa;Password=P@ssw0rd2024;Encrypt=Optional;TrustServerCertificate=True;"
 
 cria o docker compose file
 
@@ -20,3 +20,9 @@ CREATE DATABASE db;
 GO
 
   hostname -I
+
+dotnet tool install dotnet-ef --global
+
+  dotnet ef migrations add InitialCreate -o Data/Migrations
+
+  dotnet ef database update
